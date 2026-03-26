@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="description" content="KOOKKEY | 정훈 「월곡답가」— 혼탁한 세상에서 찾아낸 고결한 영혼의 노래">
+<title>KOOKKEY | 월곡답가 — 청학을 타고 속세를 떠나</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   KOOKKEY — 정훈 「월곡답가」
+   테마: 옥색(비취) 은거 — 청송·백운·초옥
+   배경: 연한 옥빛 크림 (청자 · 대나무 · 이슬)
+   한국 전통색: 태극 청(#003478) 적(#CD2E3A) + 옥색(#2A7060)
+   ═══════════════════════════════════════ */
+:root {
+  /* 청자 옥빛 배경 */
+  --white:        #F2F9F5;
+  --white-pure:   #FAFEFB;
+  --white-warm:   #E8F4EC;
+  --white-stone:  #D8EDE0;
+
+  /* 주조 — 청록 선비색 */
+  --navy:         #1A5C42;
+  --navy-mid:     #2A7A58;
+  --navy-light:   #3D9B72;
+  --navy-pale:    #E0F2E9;
+  --navy-dim:     #0E3B2A;
+
+  /* 시그니처 — 비취 옥색 */
+  --sig:          #1A5C42;
+  --sig-dim:      #0E3B2A;
+  --sig-light:    #3D9B72;
+  --sig-pale:     #E0F2E9;
+  --sig-glow:     rgba(26,92,66,.18);
+
+  /* 포인트 */
+  --korea-red:    #CD2E3A;
+  --korea-gold:   #A0740A;
+  --korea-blue:   #003478;
+  --jade:         #2A7060;
+  --pine:         #1A4A28;
+
+  --grey:         #5C7265;
+  --grey-light:   #90A89A;
+  --grey-pale:    #EDF5F0;
+  --grey-mid:     #C0D4C8;
+
+  --black:        #162018;
+  --black-soft:   #243028;
+
+  --fn-success:   #1A6B40;
+  --fn-error:     #CD2E3A;
+  --fn-warning:   #A0740A;
+  --fn-info:      #1A5C42;
+
+  --r:    12px;
+  --r2:   20px;
+  --nav-h: 60px;
+
+  --shadow-sm:   0 1px 0 rgba(26,92,66,.12), 0 2px 8px rgba(22,32,24,.08);
+  --shadow-md:   0 1px 0 rgba(26,92,66,.12), 0 4px 20px rgba(22,32,24,.10);
+  --shadow-card: 0 0 0 1.5px rgba(26,92,66,.15), 0 4px 16px rgba(22,32,24,.08);
+  --shadow-btn:  0 2px 0 var(--navy-dim), 0 4px 12px rgba(26,92,66,.22);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  min-height:100vh;
+  padding-bottom:calc(var(--nav-h) + env(safe-area-inset-bottom,0px) + 16px);
+  overflow-x:hidden;
+  position:relative;
+}
+/* 한지 결 — 옥빛 계열 */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.028'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;
+}
+.section{display:none;}
+.section.active{display:block;}
+
+/* ════ HERO ════ */
+#s-hero{
+  min-height:100vh;
+  background:
+    radial-gradient(ellipse at 75% 8%, rgba(42,112,96,.08) 0%, transparent 45%),
+    radial-gradient(ellipse at 12% 75%, rgba(26,92,66,.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 48% 52%, rgba(200,235,215,.28) 0%, transparent 65%),
+    var(--white);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 20px 100px;
+  position:relative;overflow:hidden;
+}
+#s-hero::after{
+  content:'';
+  position:absolute;bottom:calc(var(--nav-h) + 20px);left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg, transparent 5%, var(--navy-mid) 25%, var(--korea-red) 50%, var(--navy-mid) 75%, transparent 95%);
+  opacity:.16;
+}
+
+/* 배경 장식 */
+.bg-cottage{position:absolute;bottom:90px;right:18px;width:120px;height:90px;opacity:.055;pointer-events:none;z-index:0;}
+.bg-pine{position:absolute;top:55px;left:16px;opacity:.065;pointer-events:none;z-index:0;}
+.bg-crane-fly{position:absolute;top:38px;right:28px;opacity:.05;pointer-events:none;z-index:0;}
+
+/* ── 배지 ── */
+.school-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--navy);border:2px solid var(--black);color:#FFFFFF;
+  font-size:13px;letter-spacing:.18em;font-weight:700;
+  padding:8px 22px;border-radius:6px;margin-bottom:20px;
+  box-shadow:3px 3px 0 var(--black);
+  font-family:'Noto Serif KR',serif;position:relative;
+}
+.school-badge::before,.school-badge::after{content:'';position:absolute;width:5px;height:5px;background:var(--korea-red);border-radius:50%;}
+.school-badge::before{top:-3px;left:-3px;}
+.school-badge::after{bottom:-3px;right:-3px;}
+
+.hero-label{font-size:11px;letter-spacing:.22em;color:var(--grey);margin-bottom:10px;font-family:'Cormorant Garamond',serif;font-style:italic;}
+.hero-poem-title{
+  font-family:'Noto Serif KR',serif;
+  font-size:clamp(28px,7vw,50px);font-weight:700;
+  color:var(--navy-dim);letter-spacing:.06em;
+  margin-bottom:4px;position:relative;text-align:center;
+  text-shadow:0 2px 12px rgba(26,92,66,.10);
+}
+.hero-poem-title::after{
+  content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);
+  width:50px;height:2px;
+  background:linear-gradient(90deg, var(--korea-red), var(--navy));
+  border-radius:2px;
+}
+.hero-subtitle{font-size:12px;color:var(--grey);margin-bottom:30px;letter-spacing:.05em;margin-top:14px;font-family:'Cormorant Garamond',serif;font-style:italic;}
+.hero-hook{
+  background:var(--white-pure);
+  border:1.5px solid rgba(26,92,66,.22);border-left:4px solid var(--navy);
+  border-radius:var(--r);padding:18px 22px;
+  max-width:460px;width:100%;margin-bottom:28px;
+  box-shadow:var(--shadow-md);position:relative;
+}
+.hero-hook::before{content:'"';position:absolute;top:-16px;left:18px;font-family:'Cormorant Garamond',serif;font-size:52px;color:var(--navy);line-height:1;opacity:.30;}
+.hero-hook-text{font-family:'Noto Serif KR',serif;font-size:13.5px;line-height:2.0;color:var(--navy-dim);font-style:italic;padding-top:8px;}
+
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:28px;}
+.tag{background:var(--white-pure);border:1.5px solid rgba(26,92,66,.25);color:var(--navy-mid);font-size:10px;padding:4px 12px;border-radius:4px;cursor:pointer;transition:all .18s;font-weight:500;box-shadow:2px 2px 0 rgba(26,92,66,.15);touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.tag:hover,.tag:active{background:var(--navy);color:#fff;box-shadow:1px 1px 0 var(--navy-dim);transform:translate(1px,1px);}
+.tag.sig-tag{background:rgba(205,46,58,.06);border-color:rgba(205,46,58,.35);color:var(--korea-red);box-shadow:2px 2px 0 rgba(205,46,58,.2);}
+.tag.sig-tag:hover,.tag.sig-tag:active{background:var(--korea-red);color:#fff;}
+
+.chapters-preview{width:100%;max-width:460px;margin-bottom:32px;}
+.chapters-label{font-size:10px;letter-spacing:.2em;color:var(--grey);margin-bottom:10px;text-align:left;text-transform:uppercase;font-weight:600;}
+.chapter-item{background:var(--white-pure);border:1.5px solid rgba(26,92,66,.15);border-radius:var(--r);padding:11px 16px;margin-bottom:6px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .18s;box-shadow:3px 3px 0 rgba(26,92,66,.12);touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.chapter-item:hover,.chapter-item:active{background:var(--navy-pale);box-shadow:1px 1px 0 rgba(26,92,66,.12);transform:translate(2px,2px);}
+.chapter-num{background:var(--navy);color:#fff;font-size:11px;font-weight:700;width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1.5px solid var(--navy-dim);}
+.chapter-item:nth-child(6) .chapter-num{background:var(--korea-red);}
+.chapter-info{flex:1;}
+.chapter-title{font-size:13px;font-weight:600;color:var(--black);margin-bottom:1px;}
+.chapter-desc{font-size:11px;color:var(--grey);}
+.chapter-arrow{color:var(--grey-light);font-size:14px;}
+
+.btn-start{background:var(--navy);color:#FFFFFF;border:2px solid var(--navy-dim);font-size:14px;font-weight:700;letter-spacing:.06em;padding:14px 44px;border-radius:var(--r);cursor:pointer;box-shadow:4px 4px 0 var(--navy-dim);transition:all .18s;font-family:'Noto Sans KR',sans-serif;position:relative;overflow:hidden;touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-appearance:none;appearance:none;}
+.btn-start::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.10) 0%,transparent 60%);}
+.btn-start:hover,.btn-start:active{background:var(--navy-dim);box-shadow:2px 2px 0 var(--navy-dim);transform:translate(2px,2px);}
+
+/* ════ CHAPTER HEADER ════ */
+.chapter-header{position:sticky;top:0;z-index:100;background:rgba(242,249,245,.97);border-bottom:2px solid rgba(26,92,66,.15);padding:12px 20px;display:flex;align-items:center;gap:12px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+.btn-back{background:var(--white-pure);border:1.5px solid rgba(26,92,66,.25);color:var(--navy);font-size:12px;padding:6px 14px;border-radius:var(--r);cursor:pointer;transition:all .18s;font-family:'Noto Sans KR',sans-serif;box-shadow:2px 2px 0 rgba(26,92,66,.15);font-weight:600;touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-appearance:none;appearance:none;}
+.btn-back:hover,.btn-back:active{box-shadow:0 0 0;transform:translate(2px,2px);}
+.chapter-header-info{flex:1;}
+.chapter-header-num{color:var(--korea-red);font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:1px;}
+.chapter-header-title{font-size:14px;font-weight:700;color:var(--navy-dim);}
+.progress-wrap{width:100%;max-width:180px;}
+.progress-bar{height:5px;background:var(--grey-mid);border-radius:3px;overflow:hidden;border:1px solid rgba(26,92,66,.10);}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--navy),var(--navy-light));transition:width .4s ease;}
+.progress-text{font-size:10px;color:var(--grey);margin-top:3px;text-align:right;font-weight:600;}
+
+/* ════ CONTENT ════ */
+.content-area{padding:20px 18px 24px;max-width:580px;margin:0 auto;}
+.single-card{background:var(--white-pure);border:1.5px solid rgba(26,92,66,.15);border-radius:var(--r2);overflow:hidden;box-shadow:var(--shadow-card);margin-bottom:16px;}
+.single-card-header{padding:13px 18px;border-bottom:1.5px solid rgba(26,92,66,.10);display:flex;align-items:center;gap:10px;background:var(--white-warm);}
+.card-icon{font-size:17px;}
+.card-title{font-size:11px;font-weight:700;color:var(--navy);letter-spacing:.08em;text-transform:uppercase;}
+.single-card-body{padding:18px;font-size:13.5px;line-height:1.9;color:var(--black-soft);}
+.single-card-body strong{color:var(--navy-dim);font-weight:700;}
+.single-card-body em{color:var(--navy-mid);font-style:italic;}
+.single-card-body p{margin-bottom:12px;}
+.single-card-body p:last-child{margin-bottom:0;}
+
+/* ════════════════════════════════
+   형광펜 + 밑줄 시스템
+   ════════════════════════════════ */
+.hl-key    {background:rgba(160,116,10,.17); padding:1px 4px;border-radius:2px;color:#6B4D00;font-weight:600;}
+.hl-neg    {background:rgba(205,46,58,.13);  padding:1px 4px;border-radius:2px;color:#8B0000;}
+.hl-pos    {background:rgba(26,92,66,.12);   padding:1px 4px;border-radius:2px;color:#0E3B2A;}
+.hl-concept{background:rgba(0,52,120,.10);   padding:1px 4px;border-radius:2px;color:#001D50;}
+.hl-exam   {background:rgba(205,46,58,.10);  padding:1px 4px;border-radius:2px;color:#7A3800;font-weight:600;border-bottom:1.5px dashed rgba(205,46,58,.5);}
+.hl-name   {background:rgba(42,112,96,.09);  padding:1px 4px;border-radius:2px;color:var(--navy-dim);font-style:italic;}
+.ul-neg    {border-bottom:2px solid var(--korea-red);padding-bottom:1px;}
+.ul-key    {border-bottom:2.5px solid var(--navy);padding-bottom:1px;}
+.ul-wave   {text-decoration:underline wavy rgba(26,92,66,.55);text-underline-offset:3px;}
+.ul-double {border-bottom:3px double rgba(26,92,66,.5);padding-bottom:2px;}
+.ul-dot    {border-bottom:2px dotted rgba(205,46,58,.6);padding-bottom:1px;}
+.ul-dash   {border-bottom:2px dashed rgba(160,116,10,.6);padding-bottom:1px;}
+.ul-thick  {border-bottom:3px solid rgba(0,52,120,.5);padding-bottom:1px;}
+
+/* 구절 색상 */
+.poem-line-neg{color:var(--korea-red);}
+.poem-line-key{color:var(--navy-dim);font-weight:600;}
+.ann-neg{color:var(--korea-red);font-weight:700;}
+.ann-pos{color:var(--navy-dim);font-weight:700;}
+.ann-key{color:var(--korea-gold);font-weight:700;}
+.ann-warn{color:var(--korea-red);font-size:11px;background:rgba(205,46,58,.07);padding:2px 6px;border-radius:3px;border-left:2px solid var(--korea-red);}
+
+/* 시 구절 */
+.poem-block{margin:0;}
+.poem-stanza{padding:14px 16px 14px 20px;margin-bottom:4px;border-radius:var(--r);border-left:3px solid transparent;transition:all .2s;cursor:pointer;position:relative;touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;}
+.poem-stanza:hover,.poem-stanza:active{border-left-color:rgba(26,92,66,.3);background:var(--navy-pale);}
+.poem-stanza.active-stanza{border-left:3px solid var(--korea-red);background:rgba(205,46,58,.04);}
+.poem-stanza-num{font-size:9px;color:var(--grey-light);margin-bottom:8px;letter-spacing:.2em;font-weight:700;text-transform:uppercase;}
+.poem-line{font-family:'Noto Serif KR',serif;font-size:15px;line-height:2.2;color:var(--black);}
+.poem-annotation{background:var(--navy-pale);border:1.5px solid rgba(26,92,66,.2);border-top:2px solid var(--korea-red);border-radius:var(--r);padding:14px 16px;margin-top:10px;font-size:12.5px;line-height:1.8;color:var(--black-soft);display:none;}
+.poem-annotation.visible{display:block;}
+.poem-annotation-meaning{color:var(--navy);font-weight:700;margin-bottom:8px;font-size:12px;letter-spacing:.06em;}
+
+/* Summary */
+.summary-card{background:var(--white-pure);border:1.5px solid rgba(26,92,66,.15);border-top:3px solid var(--navy);border-radius:var(--r2);overflow:hidden;box-shadow:var(--shadow-card);margin-bottom:16px;}
+.summary-header{background:var(--navy);padding:12px 18px;display:flex;align-items:center;gap:8px;}
+.summary-header-icon{color:#FFD700;font-size:15px;}
+.summary-header-text{font-size:12px;font-weight:700;color:#fff;letter-spacing:.08em;text-transform:uppercase;}
+.summary-body{padding:18px;}
+.summary-item{padding:10px 0;border-bottom:1px solid var(--grey-mid);font-size:13px;line-height:1.75;color:var(--black-soft);}
+.summary-item:last-child{border-bottom:none;}
+.summary-item-label{font-size:9px;color:var(--korea-red);font-weight:700;letter-spacing:.18em;margin-bottom:4px;text-transform:uppercase;}
+
+/* Guideline */
+.guideline-header{background:var(--navy);border:1.5px solid var(--navy-dim);border-radius:var(--r2);padding:20px;box-shadow:var(--shadow-card);margin-bottom:14px;}
+.guideline-header-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:4px;}
+.guideline-header-sub{font-size:12px;color:rgba(255,255,255,.65);line-height:1.65;}
+.guideline-card{background:var(--white-pure);border:1.5px solid rgba(26,92,66,.15);border-radius:var(--r);overflow:hidden;margin-bottom:10px;box-shadow:3px 3px 0 rgba(26,92,66,.12);transition:all .18s;}
+.guideline-card:hover,.guideline-card:active{box-shadow:1px 1px 0 rgba(26,92,66,.12);transform:translate(2px,2px);}
+.guideline-card-header{background:var(--white-warm);border-bottom:1.5px solid rgba(26,92,66,.10);padding:10px 15px;display:flex;align-items:center;gap:8px;}
+.guideline-card-num{color:#fff;background:var(--navy);font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;border:1px solid var(--navy-dim);}
+.guideline-card-title{font-size:13px;font-weight:700;color:var(--navy-dim);}
+.guideline-card-body{padding:13px 15px;font-size:13px;line-height:1.8;color:var(--black-soft);}
+
+/* Ending */
+.ending-hero{background:linear-gradient(135deg, var(--navy-dim) 0%, #1A5C42 60%, #2A7A58 100%);border:1.5px solid var(--navy-dim);border-radius:var(--r2);padding:28px 20px;text-align:center;box-shadow:var(--shadow-card);margin-bottom:20px;position:relative;overflow:hidden;}
+.ending-hero::before{content:'';position:absolute;top:-30px;right:-30px;width:130px;height:130px;border-radius:50%;background:rgba(205,46,58,.15);border:1px solid rgba(205,46,58,.25);}
+.ending-title{color:#FFD700;font-size:20px;font-weight:700;margin-bottom:8px;font-family:'Noto Serif KR',serif;}
+.ending-subtitle{font-size:12.5px;color:rgba(255,255,255,.65);line-height:1.7;margin-bottom:18px;}
+.score-badge{display:inline-block;background:var(--korea-red);border:2px solid var(--black);color:#fff;font-size:20px;font-weight:900;padding:12px 28px;border-radius:var(--r);margin-bottom:20px;box-shadow:4px 4px 0 var(--black);font-family:'Noto Serif KR',serif;}
+
+/* Keywords */
+.keywords-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:18px;}
+.keyword-card{background:var(--white-pure);border:1.5px solid rgba(26,92,66,.15);border-radius:var(--r);padding:13px;text-align:left;cursor:pointer;transition:all .2s;box-shadow:2px 2px 0 rgba(26,92,66,.12);touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;}
+.keyword-card:hover,.keyword-card:active{box-shadow:0 0 0;transform:translate(2px,2px);}
+.keyword-card.memorized{background:var(--navy);border-color:var(--navy-dim);box-shadow:2px 2px 0 var(--navy-dim);}
+.keyword-card.memorized .keyword-card-word{color:#FFD700;}
+.keyword-card.memorized .keyword-card-def{color:rgba(255,255,255,.65);}
+.keyword-card-word{font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.keyword-card-def{font-size:11px;color:var(--grey);line-height:1.6;}
+
+.final-message{background:var(--navy-pale);border:1.5px solid rgba(26,92,66,.2);border-left:4px solid var(--korea-red);color:var(--navy-dim);border-radius:var(--r);padding:14px 18px;font-size:14px;line-height:1.75;font-style:italic;margin-bottom:18px;font-family:'Cormorant Garamond',serif;}
+
+/* Teacher */
+.teacher-card{background:var(--white-pure);border:1.5px solid rgba(26,92,66,.15);border-top:3px solid var(--navy);border-radius:var(--r2);padding:20px;box-shadow:var(--shadow-card);margin-bottom:18px;}
+.teacher-header{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.teacher-avatar{width:58px;height:58px;border-radius:var(--r);background:var(--navy-pale);border:2px solid rgba(26,92,66,.25);box-shadow:3px 3px 0 rgba(26,92,66,.15);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
+.teacher-info .teacher-name{color:var(--navy-dim);font-size:14px;font-weight:700;}
+.teacher-info .teacher-role{font-size:11px;color:var(--grey);margin-top:2px;}
+.teacher-statement{font-size:13px;line-height:1.85;color:var(--black-soft);margin-bottom:14px;border-left:3px solid rgba(26,92,66,.15);padding-left:14px;}
+.teacher-statement strong{color:var(--navy-dim);}
+.principle-list{display:flex;flex-direction:column;gap:7px;}
+.principle-card{background:var(--white-warm);border:1.5px solid rgba(26,92,66,.12);border-left:3px solid var(--navy);border-radius:var(--r);padding:10px 13px;transition:all .18s;display:flex;align-items:flex-start;gap:10px;box-shadow:2px 2px 0 rgba(26,92,66,.10);touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.principle-card:hover,.principle-card:active{background:var(--navy-pale);box-shadow:0 0 0;transform:translate(2px,2px);}
+.principle-num{color:var(--korea-red);font-size:13px;font-weight:800;flex-shrink:0;margin-top:1px;}
+.principle-text{font-size:12px;line-height:1.65;color:var(--navy-dim);}
+
+/* Nav Buttons */
+.nav-btns{display:flex;gap:10px;padding:14px 18px;max-width:580px;margin:0 auto;}
+.btn-prev{background:var(--white-pure);color:var(--navy);border:1.5px solid rgba(26,92,66,.2);font-size:12.5px;font-weight:600;padding:11px 22px;border-radius:var(--r);cursor:pointer;transition:all .18s;font-family:'Noto Sans KR',sans-serif;box-shadow:2px 2px 0 rgba(26,92,66,.12);touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-appearance:none;appearance:none;}
+.btn-prev:hover,.btn-prev:active{box-shadow:0 0 0;transform:translate(2px,2px);}
+.btn-next{background:var(--navy);color:#FFFFFF;border:1.5px solid var(--navy-dim);font-size:12.5px;font-weight:700;padding:11px 26px;border-radius:var(--r);cursor:pointer;transition:all .18s;box-shadow:3px 3px 0 var(--navy-dim);font-family:'Noto Sans KR',sans-serif;flex:1;touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-appearance:none;appearance:none;}
+.btn-next:hover,.btn-next:active{box-shadow:1px 1px 0 var(--navy-dim);transform:translate(2px,2px);}
+
+/* Bottom Nav */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:var(--nav-h);background:rgba(242,249,245,.98);border-top:2px solid rgba(26,92,66,.15);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:space-around;z-index:200;padding-bottom:env(safe-area-inset-bottom,0px);height:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));}
+.nav-item{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:6px 14px;transition:all .18s;border-radius:var(--r);touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.nav-item.active{background:var(--navy-pale);}
+.nav-item-icon{font-size:19px;color:var(--grey);transition:all .2s;}
+.nav-item-label{font-size:9.5px;color:var(--grey);transition:all .2s;font-weight:600;letter-spacing:.04em;}
+.nav-item.active .nav-item-icon{color:var(--navy);}
+.nav-item.active .nav-item-label{color:var(--korea-red);}
+
+/* Table */
+.study-table{width:100%;border-collapse:collapse;font-size:12px;}
+.study-table th{background:var(--navy);color:#fff;font-weight:700;padding:9px 12px;text-align:left;}
+.study-table td{padding:9px 12px;border-bottom:1px solid var(--grey-mid);color:var(--black-soft);vertical-align:top;line-height:1.65;}
+.study-table tr:last-child td{border-bottom:none;}
+.study-table tr:nth-child(even) td{background:var(--white-warm);}
+
+/* 단청 구분선 */
+.kookkey-rule{height:3px;background:linear-gradient(90deg,transparent 0%,var(--navy-mid) 15%,var(--korea-red) 35%,var(--navy) 50%,var(--korea-red) 65%,var(--navy-mid) 85%,transparent 100%);opacity:.18;margin:20px 0;border-radius:2px;}
+
+/* 서술형 */
+.essay-q-header{padding:14px 18px;display:flex;align-items:flex-start;gap:12px;cursor:pointer;background:var(--white-warm);border-bottom:1px solid transparent;transition:all .18s;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.essay-q-header:hover,.essay-q-header:active{background:var(--navy-pale);}
+.essay-q-text{font-size:13px;font-weight:600;color:var(--black);line-height:1.7;flex:1;}
+.essay-toggle-icon{color:var(--navy);font-size:12px;flex-shrink:0;margin-top:2px;transition:transform .25s;}
+.essay-toggle-icon.open{transform:rotate(180deg);}
+.essay-answer{padding:18px;font-size:13px;line-height:1.85;color:var(--black-soft);display:none;border-top:1.5px solid rgba(26,92,66,.10);}
+.essay-answer.visible{display:block;}
+.essay-answer p{margin-bottom:10px;}
+.essay-answer p:last-child{margin-bottom:0;}
+.essay-answer-label{font-size:9px;color:var(--korea-red);font-weight:700;letter-spacing:.15em;margin-bottom:12px;text-transform:uppercase;}
+
+/* KOOKKEY 워터마크 */
+.kk-left{position:fixed;left:2px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;font-family:'Cormorant Garamond',serif;font-size:8px;letter-spacing:4px;color:rgba(26,92,66,.09);user-select:none;pointer-events:none;z-index:1;font-style:italic;}
+.kk-right{position:fixed;right:2px;top:50%;transform:translateY(-50%);writing-mode:vertical-rl;font-family:'Noto Serif KR',serif;font-size:7px;letter-spacing:5px;color:rgba(205,46,58,.07);user-select:none;pointer-events:none;z-index:1;direction:rtl;}
+.kk-center{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:14px;color:rgba(26,92,66,.04);user-select:none;pointer-events:none;z-index:0;white-space:nowrap;font-style:italic;font-weight:600;}
+.kk-bottom{position:fixed;bottom:calc(var(--nav-h) + 3px);left:50%;transform:translateX(-50%);font-family:'Noto Sans KR',sans-serif;font-size:7px;letter-spacing:7px;color:rgba(205,46,58,.05);user-select:none;pointer-events:none;z-index:1;white-space:nowrap;font-weight:700;}
+
+@keyframes fadeInUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.fade-in-up{animation:fadeInUp .45s ease forwards;}
+.tag-em{color:var(--korea-red);font-weight:700;}
+.mark-sig{background:rgba(26,92,66,.10);padding:1px 3px;border-radius:2px;}
+.mark-navy{background:rgba(26,92,66,.10);padding:1px 3px;border-radius:2px;}
+.mark-grey{background:rgba(92,114,101,.10);padding:1px 3px;border-radius:2px;}
+</style>
+</head>
+<body>
+
+<!-- 청학 숨은그림 — 「월곡답가」전용 -->
+<div style="position:fixed;top:8%;right:5%;font-size:28px;opacity:.042;pointer-events:none;z-index:0;transform:rotate(-12deg);user-select:none;" aria-hidden="true">🦢</div>
+<div style="position:fixed;top:42%;left:2%;font-size:18px;opacity:.032;pointer-events:none;z-index:0;transform:rotate(10deg);user-select:none;" aria-hidden="true">🦢</div>
+<div style="position:fixed;bottom:26%;right:4%;font-size:22px;opacity:.038;pointer-events:none;z-index:0;transform:rotate(-8deg) scaleX(-1);user-select:none;" aria-hidden="true">🦢</div>
+<div style="position:fixed;top:64%;left:3%;font-size:14px;opacity:.028;pointer-events:none;z-index:0;transform:rotate(16deg);user-select:none;" aria-hidden="true">🦢</div>
+
+<!-- KOOKKEY 워터마크 -->
+<span class="kk-left"  aria-hidden="true">K·O·O·K·K·E·Y</span>
+<span class="kk-right" aria-hidden="true">K O O K K E Y</span>
+<span class="kk-center" aria-hidden="true">K O O K K E Y</span>
+<span class="kk-bottom" aria-hidden="true">KOOKKEY</span>
+
+<!-- ══════ HERO ══════ -->
+<section id="s-hero" class="section active">
+
+  <!-- 배경: 초가삼간 오두막 -->
+  <svg class="bg-cottage" viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- 초가지붕 -->
+    <path d="M10 50 L60 8 L110 50 Z" fill="#2A7060" opacity=".55"/>
+    <path d="M15 50 L60 12 L105 50 Z" fill="#3D9B72" opacity=".4"/>
+    <!-- 몸통 -->
+    <rect x="22" y="50" width="76" height="32" fill="#1A5C42" opacity=".45"/>
+    <!-- 문 -->
+    <rect x="48" y="60" width="24" height="22" rx="3" fill="#0E3B2A" opacity=".5"/>
+    <!-- 창 -->
+    <rect x="28" y="56" width="14" height="12" rx="2" fill="#E0F2E9" opacity=".6"/>
+    <rect x="78" y="56" width="14" height="12" rx="2" fill="#E0F2E9" opacity=".6"/>
+    <!-- 굴뚝 -->
+    <rect x="80" y="30" width="8" height="22" fill="#1A4A28" opacity=".4"/>
+    <!-- 연기 -->
+    <path d="M84 28 Q86 22 84 16 Q82 10 84 4" stroke="#2A7060" stroke-width="1.2" fill="none" opacity=".4" stroke-linecap="round"/>
+    <!-- 소나무 -->
+    <line x1="8" y1="82" x2="8" y2="50" stroke="#1A4A28" stroke-width="2" opacity=".5"/>
+    <path d="M8 50 Q-2 40 8 30 Q18 40 8 50Z" fill="#2A7060" opacity=".45"/>
+    <path d="M8 40 Q-4 32 8 22 Q20 32 8 40Z" fill="#1A5C42" opacity=".4"/>
+  </svg>
+
+  <!-- 배경: 소나무 -->
+  <svg class="bg-pine" viewBox="0 0 50 90" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <line x1="25" y1="90" x2="25" y2="40" stroke="#1A4A28" stroke-width="2.5"/>
+    <path d="M25 60 Q5 48 25 36 Q45 48 25 60Z" fill="#2A7060"/>
+    <path d="M25 48 Q4 36 25 22 Q46 36 25 48Z" fill="#1A5C42"/>
+    <path d="M25 36 Q8 24 25 10 Q42 24 25 36Z" fill="#2A7060"/>
+  </svg>
+
+  <!-- 배경: 청학 날기 -->
+  <svg class="bg-crane-fly" viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M5 20 Q20 6 30 20 Q40 34 55 20" stroke="#1A5C42" stroke-width="2" fill="none"/>
+    <path d="M22 20 Q26 10 30 20" fill="#1A5C42" opacity=".7"/>
+    <circle cx="30" cy="18" r="3.5" fill="#1A5C42" opacity=".6"/>
+    <path d="M28" y1="18" x2="25" y2="25" stroke="#1A5C42" stroke-width="1.5" opacity=".5"/>
+    <path d="M10 22 Q15 29 20 22" stroke="#1A5C42" stroke-width="1.2" fill="none" opacity=".5"/>
+    <path d="M40 22 Q45 29 50 22" stroke="#1A5C42" stroke-width="1.2" fill="none" opacity=".5"/>
+  </svg>
+
+  <div class="school-badge">「 월곡답가 」</div>
+  <div class="hero-label">조선 시대 연시조 — 정훈 (鄭勳)</div>
+  <div class="hero-poem-title">월곡답가</div>
+  <div class="hero-subtitle">혼탁한 세상에서 찾아낸 고결한 영혼의 노래</div>
+
+  <div class="hero-hook">
+    <div class="hero-hook-text">
+      청송으로 울을 삼고 백운으로 장 두르고<br>
+      <span class="tag-em">흉중에 진념이 없으니 그를 사랑하노라</span><br>
+      <span style="font-size:12px;color:var(--grey);">— 산중에 타시는 청학 나도 타다 어떠하리</span>
+    </div>
+  </div>
+
+  <div class="tag-row">
+    <span class="tag">연시조 8수</span>
+    <span class="tag sig-tag">인물 대비</span>
+    <span class="tag sig-tag">탈속 지향</span>
+    <span class="tag">공간 상징</span>
+    <span class="tag">고사 인용</span>
+    <span class="tag">신선 사상</span>
+  </div>
+
+  <div class="chapters-preview">
+    <div class="chapters-label">학습 구성 — 총 6단계</div>
+    <div class="chapter-item" onclick="gotoSection(1)"><div class="chapter-num">1</div><div class="chapter-info"><div class="chapter-title">작품 배경 &amp; 개요</div><div class="chapter-desc">창작 맥락 · 월곡의 실존 · 30초 요약</div></div><span class="chapter-arrow">›</span></div>
+    <div class="chapter-item" onclick="gotoSection(2)"><div class="chapter-num">2</div><div class="chapter-info"><div class="chapter-title">The Finest Annotation</div><div class="chapter-desc">8수 전문 · 형광펜·밑줄 심층 해설</div></div><span class="chapter-arrow">›</span></div>
+    <div class="chapter-item" onclick="gotoSection(3)"><div class="chapter-num">3</div><div class="chapter-info"><div class="chapter-title">작품 심층 분석</div><div class="chapter-desc">정서 변화 · 소재 해설 · 표현 기법</div></div><span class="chapter-arrow">›</span></div>
+    <div class="chapter-item" onclick="gotoSection(4)"><div class="chapter-num">4</div><div class="chapter-info"><div class="chapter-title">핵심 정리 &amp; 내신 함정</div><div class="chapter-desc">Key Point 5 · 수능 함정 · 연계 작품</div></div><span class="chapter-arrow">›</span></div>
+    <div class="chapter-item" onclick="gotoSection(5)"><div class="chapter-num">5</div><div class="chapter-info"><div class="chapter-title">Advanced Questions</div><div class="chapter-desc">서술형·논술형 상위권 완성 문제</div></div><span class="chapter-arrow">›</span></div>
+    <div class="chapter-item" onclick="gotoSection(6)"><div class="chapter-num">6</div><div class="chapter-info"><div class="chapter-title">키워드 암기 &amp; 마무리</div><div class="chapter-desc">핵심 카드 · 국어 쌤 코멘트</div></div><span class="chapter-arrow">›</span></div>
+  </div>
+  <button class="btn-start" onclick="gotoSection(1)">학습 시작하기 →</button>
+</section>
+
+<!-- ══════ S1 ══════ -->
+<section id="s-1" class="section">
+  <div class="chapter-header"><button class="btn-back" onclick="gotoSection(0)">← 목록</button><div class="chapter-header-info"><div class="chapter-header-num">CHAPTER 01</div><div class="chapter-header-title">작품 배경 &amp; 개요</div></div><div class="progress-wrap"><div class="progress-bar"><div class="progress-bar-fill" style="width:16%"></div></div><div class="progress-text">1 / 6</div></div></div>
+  <div class="content-area">
+    <div class="single-card fade-in-up"><div class="single-card-header"><span class="card-icon">🌿</span><span class="card-title">창작 배경 및 역사적 맥락</span></div><div class="single-card-body"><p>임진왜란 이후 사회적 혼란과 정치적 갈등이 심화되던 시기의 작품이에요. 작가 정훈은 전쟁 때 의병으로 활약했지만, 전후 혼탁한 정치에 환멸을 느끼고 낙향했어요. <strong>월곡(月谷) 우배선</strong>은 그의 실존했던 벗으로, 임진왜란 의병장 출신이지만 전쟁 후 모든 벼슬을 거부하고 자연 속에 은거한 인물이에요.</p><p>이 작품은 단순한 친구 찬양이 아니에요. <em>당파 싸움과 권력욕으로 얼룩진 현실 정치에 대한 강한 환멸</em>이 바탕에 깔려 있어요. 월곡이 머무는 자연은 세속의 더러움이 닿지 않는 성역이에요.</p></div></div>
+    <div class="summary-card fade-in-up"><div class="summary-header"><span class="summary-header-icon">🎯</span><span class="summary-header-text">수별 주제 공식</span></div><div class="summary-body">
+      <div class="summary-item"><div class="summary-item-label">제1수</div><strong>옛사람의 발견</strong> — 이목구비 같건마는, 도덕적 내면이 다름. 월곡 = 현세의 옛사람</div>
+      <div class="summary-item"><div class="summary-item-label">제2수</div><strong>가식 vs 진실의 대비</strong> — 분 바른 각시의 조롱 vs 벗만이 알아주는 내면의 아름다움</div>
+      <div class="summary-item"><div class="summary-item-label">제3수</div><strong>청빈한 은거 예찬</strong> — 청송·백운·초옥삼간. 흉중에 진념 없음 = 무욕(無慾)의 삶</div>
+      <div class="summary-item"><div class="summary-item-label">제4~6수</div><strong>그리움과 극복</strong> — 용추동·구름다리의 거리. 꿈과 마음만이 오락가락함</div>
+      <div class="summary-item"><div class="summary-item-label">제7~8수</div><strong>탈속의 소망</strong> — 상산 채지, 세상 듣도 보도 마사이다, 청학을 타고 싶은 초월 의지</div>
+    </div></div>
+    <div class="single-card fade-in-up"><div class="single-card-header"><span class="card-icon">📌</span><span class="card-title">작품 기본 정보</span></div><div class="single-card-body"><table class="study-table"><tr><th>항목</th><th>내용</th></tr><tr><td>작자</td><td>정훈 — 조선 중기 문인, 임진왜란 의병 참전</td></tr><tr><td>갈래</td><td>연시조 8수 — 시조 형식의 연작</td></tr><tr><td>주제</td><td>고결한 벗 월곡에 대한 그리움, 속세 거부, 탈속적 삶의 지향</td></tr><tr><td>특징</td><td>인물 대비 · 공간 대비 · 고사 인용 · 신선 사상 · 꿈의 매개</td></tr><tr><td>핵심 소재</td><td>분 바른 각시(가식) · 청송·백운(은거) · 청학(탈속) · 상산(고사)</td></tr></table></div></div>
+  </div>
+  <div class="nav-btns"><button class="btn-prev" onclick="gotoSection(0)">← 목록</button><button class="btn-next" onclick="gotoSection(2)">구절 풀이 →</button></div>
+</section>
+
+<!-- ══════ S2: The Finest Annotation ══════ -->
+<section id="s-2" class="section">
+  <div class="chapter-header"><button class="btn-back" onclick="gotoSection(0)">← 목록</button><div class="chapter-header-info"><div class="chapter-header-num">CHAPTER 02</div><div class="chapter-header-title">The Finest Annotation</div></div><div class="progress-wrap"><div class="progress-bar"><div class="progress-bar-fill" style="width:33%"></div></div><div class="progress-text">2 / 6</div></div></div>
+  <div class="content-area">
+
+    <div class="single-card fade-in-up">
+      <div class="single-card-header"><span class="card-icon">🎨</span><span class="card-title">표시 범례</span></div>
+      <div class="single-card-body" style="font-size:12px;line-height:2.4;">
+        <span class="hl-key">핵심어·황금</span>&ensp;<span class="hl-neg">부정·비판어</span>&ensp;<span class="hl-pos">긍정·예찬어</span>&ensp;<span class="hl-concept">개념·고사어</span>&ensp;<span class="hl-exam">시험포인트</span>&ensp;<span class="hl-name">지명·인명</span><br>
+        <span class="ul-neg">── 비판 구절</span>&ensp;<span class="ul-key">── 핵심 구절</span>&ensp;<span class="ul-double">══ 최중요</span>&ensp;<span class="ul-dot">·· 주의</span>&ensp;<span class="ul-dash">- - 고사어</span>&ensp;<span class="ul-wave">물결 중요</span>
+      </div>
+    </div>
+
+    <div class="single-card fade-in-up">
+      <div class="single-card-header"><span class="card-icon">✍️</span><span class="card-title">8수 전문 &amp; 심층 해설 — 탭하면 해설이 펼쳐져요</span></div>
+      <div class="single-card-body">
+        <div class="poem-block">
+
+          <!-- 제1수 -->
+          <div class="poem-stanza" onclick="toggleAnnotation('a1');sparkleEffect(this)">
+            <div class="poem-stanza-num">① 제1수 — 옛사람의 발견, 벗에 대한 자부심</div>
+            <div class="poem-line">
+              <span class="ul-dash">옛사람 이제 사람 이목구비 같건마는</span><br>
+              <span class="hl-neg ul-neg">나 혼자 어찌하여 옛사람을 그리는고</span><br>
+              <span class="hl-key ul-double">이제도 옛사람 계시니 긔 내 벗인가 하노라</span>
+            </div>
+            <div class="poem-annotation" id="a1">
+              <div class="poem-annotation-meaning">🏛️ 인물 대비 · 내면과 외면</div>
+              <span class="ann-pos">「이목구비 같건마는」</span> — 외양은 차이 없지만 <span class="hl-neg">도덕적 내면이 다름</span>을 강조해요. 겉만 봐서는 모른다는 역설이에요.<br><br>
+              <span class="ann-neg">「옛사람을 그리는고」</span> — 옛 성현의 <span class="hl-concept">도덕적 이상이 살아있던 과거</span>를 동경해요. 현실에 대한 비판이 담겨 있어요.<br><br>
+              <span class="ann-key">「긔 내 벗인가 하노라」</span> — <span class="hl-key">월곡을 현세의 옛사람으로 인정</span>하는 기쁨. 이 시 전체의 출발점이에요.<br>
+              <span class="ann-warn">⚠️ '옛사람'은 과거 특정인이 아닌 도덕적 이상형의 상징!</span>
+            </div>
+          </div>
+
+          <!-- 제2수 -->
+          <div class="poem-stanza" onclick="toggleAnnotation('a2');sparkleEffect(this)">
+            <div class="poem-stanza-num">② 제2수 — 가식 세상 비판, 진정한 아름다움</div>
+            <div class="poem-line">
+              <span class="ul-dot">내 양자 하 험하니 비루 성적 아니하네</span><br>
+              <span class="hl-neg ul-neg poem-line-neg">분 바른 각시님네 다 웃고 다니거든</span><br>
+              <span class="hl-key ul-double">엊그제 지나간 한 분이 혼자 곱다 하노라</span>
+            </div>
+            <div class="poem-annotation" id="a2">
+              <div class="poem-annotation-meaning">💄 가식 vs 진실 · 핵심 대비!</div>
+              <span class="ann-pos">「내 양자 하 험하니」</span> — 자신의 거친 외모를 낮추어 말함. <span class="hl-pos">자책이 아닌 역설적 겸양</span>이에요. 내면의 단단함을 강조하기 위한 포석이에요.<br><br>
+              <span class="ann-neg">「분 바른 각시님네」</span> — <span class="hl-exam">시험 핵심!</span> 단순한 여성 묘사 ❌ → <span class="hl-neg">내면의 수양 없이 겉치레만 하는 세속적 인물들</span>에 대한 시각적 저격 ✅<br><br>
+              <span class="ann-key">「혼자 곱다 하노라」</span> — 세상 모두가 비웃어도 <span class="hl-key">월곡만이 화자의 진정한 가치를 알아줌</span>. 정신적 유대의 핵심이에요.<br>
+              <span class="ann-warn">⚠️ 함정: 화자가 자신을 비하하는 것으로 해석하면 오답!</span>
+            </div>
+          </div>
+
+          <!-- 제3수 -->
+          <div class="poem-stanza" onclick="toggleAnnotation('a3');sparkleEffect(this)">
+            <div class="poem-stanza-num">③ 제3수 — 청빈한 은거, 무욕의 예찬</div>
+            <div class="poem-line">
+              <span class="hl-pos ul-key">청송으로 울을 삼고 백운으로 장 두르고</span><br>
+              <span class="hl-pos">초옥삼간에 숨어 계신 저 내 벗님</span><br>
+              <span class="hl-key ul-double">흉중에 진념이 없으니 그를 사랑하노라</span>
+            </div>
+            <div class="poem-annotation" id="a3">
+              <div class="poem-annotation-meaning">🌲 자연 묘사 · 무욕(無慾)의 경지</div>
+              <span class="ann-pos">「청송으로 울을 삼고」</span> — <span class="hl-pos">푸른 소나무 = 울타리</span>. 절개 · 불변의 상징. 자연과 일체가 된 삶이에요.<br><br>
+              <span class="ann-pos">「백운으로 장 두르고」</span> — <span class="hl-pos">흰 구름 = 병풍</span>. 세속의 더러움을 차단하는 정신적 결계예요.<br><br>
+              <span class="ann-key">「<span class="hl-exam">진념(塵念)</span>이 없으니」</span> — <span class="hl-key">시험 핵심 어휘!</span> '먼지 같은 생각' = 세속적 욕심(부귀영화·명예)이 전혀 없음. 화자가 월곡을 사랑하는 결정적 이유예요.
+            </div>
+          </div>
+
+          <!-- 제4수 -->
+          <div class="poem-stanza" onclick="toggleAnnotation('a4');sparkleEffect(this)">
+            <div class="poem-stanza-num">④ 제4수 — 공간적 거리감과 꿈의 매개</div>
+            <div class="poem-line">
+              <span class="ul-wave">벗님 사는 땅을 생각코 바라보니</span><br>
+              <span class="hl-name ul-dash">용추동 밖이오 구름다리 위로다</span><br>
+              <span class="hl-key ul-key">밤마다 외로운 꿈만 혼자 다녀오노라</span>
+            </div>
+            <div class="poem-annotation" id="a4">
+              <div class="poem-annotation-meaning">🌙 공간 상징 · 꿈의 이중성</div>
+              <span class="ann-pos">「용추동 밖이오 구름다리 위로다」</span> — <span class="hl-name">구체적 지명</span> + <span class="hl-pos">높은 지형</span>으로 벗의 거처가 지닌 신비로움을 드러내요. 신선 세계에 가까운 공간이에요.<br><br>
+              <span class="ann-key">「밤마다 외로운 꿈만」</span> — <span class="hl-key">꿈의 이중적 기능</span>을 파악해야 해요.<br>
+              ① <span class="hl-pos">긍정</span>: 현실의 거리를 뛰어넘는 유일한 연결 통로<br>
+              ② <span class="hl-neg">부정</span>: '꿈만'이라는 표현 → 현실에서는 만날 수 없다는 비극적 거리감 강조<br>
+              <span class="ann-warn">⚠️ 꿈은 이중적 장치 — 긍정과 부정 모두 정답!</span>
+            </div>
+          </div>
+
+          <!-- 제5수 -->
+          <div class="poem-stanza" onclick="toggleAnnotation('a5');sparkleEffect(this)">
+            <div class="poem-stanza-num">⑤ 제5수 — 일상 속 끊임없는 그리움</div>
+            <div class="poem-line">
+              <span class="ul-wave">달이 밝은 제는 잔을 들고 생각하고</span><br>
+              <span class="ul-wave">시절이 좋은 제는 경을 보고 그리노라</span><br>
+              <span class="hl-key ul-double">사람이 덜 괴운 탓으로 잊힐 적이 적어라</span>
+            </div>
+            <div class="poem-annotation" id="a5">
+              <div class="poem-annotation-meaning">🌕 일상 속 그리움 · 역설법</div>
+              <span class="ann-pos">「달이 밝은 제는 / 시절이 좋은 제는」</span> — 좋은 것을 볼 때마다 벗이 생각남. <span class="hl-pos">아름다운 순간일수록 더 깊어지는 그리움</span>이에요.<br><br>
+              <span class="ann-key">「사람이 덜 괴운 탓으로」</span> — <span class="hl-key">역설법</span>이에요. '사람을 덜 사랑하는 탓에 잊힐 적이 적다'는 뜻이에요. <span class="hl-pos">너무 사랑하기에 잠시도 잊을 수 없음</span>을 역설로 표현했어요.<br>
+              <span class="ann-warn">⚠️ '덜 괴운'을 부정적으로 해석하면 오답 — 역설!</span>
+            </div>
+          </div>
+
+          <!-- 제6수 -->
+          <div class="poem-stanza" onclick="toggleAnnotation('a6');sparkleEffect(this)">
+            <div class="poem-stanza-num">⑥ 제6수 — 장애물의 역설, 마음의 길</div>
+            <div class="poem-line">
+              <span class="hl-neg ul-dot">뫼는 첩첩하고 구름은 잦았으니</span><br>
+              <span class="hl-neg ul-neg">고인의 집 땅이 바라도 볼 성 없다</span><br>
+              <span class="hl-key ul-double">마음만 길 알아 두고 오락가락하노라</span>
+            </div>
+            <div class="poem-annotation" id="a6">
+              <div class="poem-annotation-meaning">⛰️ 장애물의 역설 · 정신적 유대</div>
+              <span class="ann-neg">「뫼는 첩첩하고 구름은 잦았으니」</span> — 자연이 <span class="hl-neg">만남을 가로막는 장애물</span>로 전환돼요. 3수의 아름다운 자연이 6수에서는 단절의 벽이 되는 반전이에요.<br><br>
+              <span class="ann-key">「마음만 길 알아 두고」</span> — <span class="hl-key">물리적 육신은 가지 못해도 정신적 마음은 늘 벗 곁을 맴돔</span>. 육체의 한계를 정신으로 초월하는 선비의 의지예요.<br>
+              <span class="ann-warn">⚠️ 자연이 아름답기만 한 배경 ❌ → 장애물과 은거지 양면 기능 ✅</span>
+            </div>
+          </div>
+
+          <!-- 제7수 -->
+          <div class="poem-stanza" onclick="toggleAnnotation('a7');sparkleEffect(this)">
+            <div class="poem-stanza-num">⑦ 제7수 — 속세 단절, 은거 제안</div>
+            <div class="poem-line">
+              <span class="ul-dash hl-concept">상산에 채지하러 부디 넷이 가리런가</span><br>
+              <span class="hl-pos ul-key">좇을 이 없는데 우리 둘이 가사이다</span><br>
+              <span class="hl-neg ul-double poem-line-neg">세상의 어지러운 일들 듣도 보도 마사이다</span>
+            </div>
+            <div class="poem-annotation" id="a7">
+              <div class="poem-annotation-meaning">🍃 상산사호 고사 · 탈속 의지</div>
+              <span class="ann-pos">「상산에 채지하러」</span> — <span class="hl-concept">상산사호(商山四皓)</span> 고사 인용. 중국 진나라 때 난세를 피해 산속에 숨어 버섯을 캐 먹으며 살았던 네 노인의 이야기예요.<br><br>
+              <span class="ann-key">「넷이 가리런가 / 우리 둘이 가사이다」</span> — 고사 속 넷이 아니라 <span class="hl-key">둘만으로도 충분하다는 친밀감</span>. 세상의 눈을 의식하지 않겠다는 선언이에요.<br><br>
+              <span class="ann-neg">「듣도 보도 마사이다」</span> — <span class="hl-neg">속세의 정치·권력욕으로부터 완전한 격리</span>를 원하는 강한 탈속 의지예요.
+            </div>
+          </div>
+
+          <!-- 제8수 -->
+          <div class="poem-stanza" onclick="toggleAnnotation('a8');sparkleEffect(this)">
+            <div class="poem-stanza-num">⑧ 제8수 — 청학, 신선 세계로의 초월</div>
+            <div class="poem-line">
+              <span class="ul-wave">방장산 기슭에서 신선님네 만나신가</span><br>
+              <span class="ul-key">얼핏이 보아든 내 말씀 전하소서</span><br>
+              <span class="hl-key ul-double poem-line-key">산중에 타시는 청학 나도 타다 어떠하리</span>
+            </div>
+            <div class="poem-annotation" id="a8">
+              <div class="poem-annotation-meaning">🦢 청학 상징 · 탈속의 완성</div>
+              <span class="ann-pos">「방장산 기슭에서 신선님네 만나신가」</span> — 월곡이 이미 <span class="hl-pos">신선의 경지에 도달했을 것이라는 상상</span>이에요. 최고의 찬사이자 이상향의 설정이에요.<br><br>
+              <span class="ann-key">「<span class="hl-key">청학(靑鶴)</span>」</span> — <span class="hl-exam">시험 핵심 소재!</span> 신선이 타는 푸른 학이에요. <span class="hl-pos">속세의 모든 번뇌와 정치적 갈등에서 벗어난 완전한 자유</span>를 상징해요.<br><br>
+              <span class="ann-key">「나도 타다 어떠하리」</span> — 화자도 월곡처럼 <span class="hl-key">초월적 자유의 경지에 도달하고 싶은 소망</span>이에요. 작품 전체의 지향점이 응축된 마지막 구절이에요.<br>
+              <span class="ann-warn">⚠️ 청학 = 현실 도피 ❌ → 가치 지키기 위한 정신적 승화 ✅</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-btns"><button class="btn-prev" onclick="gotoSection(1)">← 배경</button><button class="btn-next" onclick="gotoSection(3)">심층 분석 →</button></div>
+</section>
+
+<!-- ══════ S3 ══════ -->
+<section id="s-3" class="section">
+  <div class="chapter-header"><button class="btn-back" onclick="gotoSection(0)">← 목록</button><div class="chapter-header-info"><div class="chapter-header-num">CHAPTER 03</div><div class="chapter-header-title">작품 심층 분석</div></div><div class="progress-wrap"><div class="progress-bar"><div class="progress-bar-fill" style="width:50%"></div></div><div class="progress-text">3 / 6</div></div></div>
+  <div class="content-area">
+    <div class="summary-card fade-in-up"><div class="summary-header"><span class="summary-header-icon">📊</span><span class="summary-header-text">화자의 정서 변화 흐름</span></div><div class="summary-body"><table class="study-table"><tr><th>장면</th><th>정서</th><th>핵심 어휘</th></tr><tr><td>1~2수</td><td>자부심 · 세태 비판</td><td>긔 내 벗인가, 혼자 곱다</td></tr><tr><td>3수</td><td>예찬 · 경이로움</td><td>진념이 없으니, 사랑하노라</td></tr><tr><td>4~6수</td><td>그리움 · 안타까움</td><td>외로운 꿈, 마음만 오락가락</td></tr><tr><td>7~8수</td><td>탈속 의지 · 초월 소망</td><td>듣도 보도 마사이다, 청학 타다</td></tr></table></div></div>
+    <div class="single-card fade-in-up"><div class="single-card-header"><span class="card-icon">🏛️</span><span class="card-title">핵심 대비 구조 — 이 시의 뼈대</span></div><div class="single-card-body"><table class="study-table"><tr><th>대비 항목</th><th>부정적 세계</th><th>긍정적 세계</th></tr><tr><td>인물</td><td><span class="hl-neg">분 바른 각시</span> (가식·세속)</td><td><span class="hl-pos">월곡 (진실·고결)</span></td></tr><tr><td>공간</td><td><span class="hl-neg">세상 (어지러운 일)</span></td><td><span class="hl-pos">용추동·상산 (이상향)</span></td></tr><tr><td>가치</td><td><span class="hl-neg">외모·명예·권력</span></td><td><span class="hl-pos">내면·무욕·안빈</span></td></tr><tr><td>자연의 역할</td><td><span class="hl-neg">장애물 (뫼·구름)</span></td><td><span class="hl-pos">은거지 (청송·백운)</span></td></tr></table></div></div>
+    <div class="single-card fade-in-up"><div class="single-card-header"><span class="card-icon">🌿</span><span class="card-title">소재 &amp; 상징 해설</span></div><div class="single-card-body"><table class="study-table"><tr><th>소재</th><th>상징 / 의미</th></tr><tr><td><span class="hl-concept">옛사람</span></td><td>물리적 과거인 ❌ → 도덕적으로 완벽했던 성현의 상징 ✅</td></tr><tr><td><span class="hl-exam">분 바른 각시</span></td><td>여성 비하 ❌ → 겉치레·가식의 세속적 인물들 통칭 ✅</td></tr><tr><td><span class="hl-key">진념(塵念)</span></td><td>먼지 같은 생각 = 세속적 욕심·명예욕. 없음이 최고의 덕</td></tr><tr><td>꿈</td><td>이중적: 거리 극복 장치(긍정) + 현실 단절 강조(부정)</td></tr><tr><td><span class="hl-concept">상산 채지</span></td><td>상산사호 고사 → 난세 피해 은거하는 삶의 전례</td></tr><tr><td><span class="hl-key">청학(靑鶴)</span></td><td>신선의 학 → 속세 초월, 탈속적 자유의 상징</td></tr></table></div></div>
+    <div class="single-card fade-in-up"><div class="single-card-header"><span class="card-icon">🏗️</span><span class="card-title">표현 기법 총정리</span></div><div class="single-card-body"><table class="study-table"><tr><th>기법</th><th>예시 및 효과</th></tr><tr><td><span class="hl-concept">인물 대비</span></td><td>분 바른 각시 ↔ 월곡 — 가식 vs 진실의 주제 선명화</td></tr><tr><td>공간 대비</td><td>어지러운 세상 ↔ 용추동 — 현실 vs 이상향 구도</td></tr><tr><td>고사 인용</td><td>상산사호 — 은거의 전례로 탈속 의지에 설득력 부여</td></tr><tr><td>꿈의 매개</td><td>물리적 거리를 정신적 연결로 극복 — 이중적 기능</td></tr><tr><td><span class="hl-key">역설</span></td><td>덜 괴운 탓으로 잊힐 적 없음 — 사랑의 깊이를 반어로 표현</td></tr><tr><td>자연의 이중 기능</td><td>청송·백운(은거지의 아름다움) ↔ 뫼·구름(장애물) — 같은 자연이 역할 전환</td></tr><tr><td>신선 사상</td><td>청학·방장산 → 도교적 탈속 세계 지향</td></tr></table></div></div>
+  </div>
+  <div class="nav-btns"><button class="btn-prev" onclick="gotoSection(2)">← 구절 풀이</button><button class="btn-next" onclick="gotoSection(4)">핵심 정리 →</button></div>
+</section>
+
+<!-- ══════ S4 ══════ -->
+<section id="s-4" class="section">
+  <div class="chapter-header"><button class="btn-back" onclick="gotoSection(0)">← 목록</button><div class="chapter-header-info"><div class="chapter-header-num">CHAPTER 04</div><div class="chapter-header-title">핵심 정리 &amp; 내신 함정</div></div><div class="progress-wrap"><div class="progress-bar"><div class="progress-bar-fill" style="width:66%"></div></div><div class="progress-text">4 / 6</div></div></div>
+  <div class="content-area">
+    <div class="guideline-header fade-in-up"><div class="guideline-header-title">⭐ Key Point 5</div><div class="guideline-header-sub">이 5가지를 모두 이해하면 이 작품 완성!</div></div>
+    <div class="guideline-card fade-in-up"><div class="guideline-card-header"><div class="guideline-card-num">01</div><div class="guideline-card-title">인물 대비 — 이 작품의 뼈대</div></div><div class="guideline-card-body"><span class="hl-neg">분 바른 각시</span>(가식·세속)와 <span class="hl-pos">월곡</span>(진실·고결)의 대비가 주제를 선명하게 만들어요. 화자는 외모가 아닌 <span class="hl-key">내면의 무욕과 고결함</span>을 진정한 아름다움으로 봐요.</div></div>
+    <div class="guideline-card fade-in-up"><div class="guideline-card-header"><div class="guideline-card-num">02</div><div class="guideline-card-title">진념(塵念) — 핵심 어휘</div></div><div class="guideline-card-body"><span class="hl-key">진념</span> = 먼지 같은 생각 = <span class="hl-neg">세속적 욕심·명예욕</span>. 월곡에게 이것이 없다는 것이 화자가 그를 사랑하는 결정적 이유예요.</div></div>
+    <div class="guideline-card fade-in-up"><div class="guideline-card-header"><div class="guideline-card-num">03</div><div class="guideline-card-title">자연의 이중적 역할</div></div><div class="guideline-card-body"><span class="hl-pos">청송·백운</span> = 은거의 아름다운 공간 / <span class="hl-neg">뫼·구름</span> = 만남을 막는 장애물. <span class="hl-key">같은 자연이 역할이 달라짐</span>에 주목해야 해요.</div></div>
+    <div class="guideline-card fade-in-up"><div class="guideline-card-header"><div class="guideline-card-num">04</div><div class="guideline-card-title">꿈의 이중성</div></div><div class="guideline-card-body">꿈은 <span class="hl-pos">거리를 초월하는 연결 장치</span>이기도 하고, <span class="hl-neg">현실에서는 만날 수 없음을 강조하는 비극적 장치</span>이기도 해요. 긍정·부정 양면 모두 정답이에요.</div></div>
+    <div class="guideline-card fade-in-up"><div class="guideline-card-header"><div class="guideline-card-num">05</div><div class="guideline-card-title">청학 — 탈속적 의지의 결정체</div></div><div class="guideline-card-body"><span class="hl-key">청학</span> = 신선의 학. 혼탁한 현실에서 벗어나 <span class="hl-pos">더 높은 가치를 지키기 위한 정신적 승화</span>예요. 현실 도피가 아닌 승리자의 태도예요.</div></div>
+    <div class="kookkey-rule"></div>
+    <div class="single-card fade-in-up" style="border-top:3px solid var(--korea-red);"><div class="single-card-header"><span class="card-icon">⚠️</span><span class="card-title">내신 및 수능 함정 방어</span></div><div class="single-card-body"><p><span class="hl-exam">함정 1:</span> '분 바른 각시'를 <span class="hl-neg">단순한 여성 묘사</span>로 보면 오답. → <strong>가식적인 세속적 인물들 전체를 대표하는 비판적 표현</strong>이에요.</p><p><span class="hl-exam">함정 2:</span> 화자가 '내 양자 하 험하다'고 한 것을 <span class="hl-neg">자책·자아 비하</span>로 보면 오답. → <strong>세속의 형식적 미학을 거부하는 역설적 겸양</strong>이에요.</p><p><span class="hl-exam">함정 3:</span> 꿈을 <span class="hl-neg">단순히 긍정적 연결</span>로만 보면 오답. → <strong>현실 거리감의 비극적 강조 역할도 동시에</strong>예요.</p><p><span class="hl-exam">함정 4:</span> 청학을 <span class="hl-neg">현실 도피</span>로 보면 오답. → <strong>혼탁한 현실에 저항하여 더 높은 가치를 지키는 정신적 승화</strong>예요.</p></div></div>
+    <div class="single-card fade-in-up"><div class="single-card-header"><span class="card-icon">🔗</span><span class="card-title">연계 추천 작품</span></div><div class="single-card-body"><p><strong>정철 「사미인곡」:</strong> <span class="hl-concept">임에 대한 그리움과 꿈이라는 매개체 사용</span>에서 유사성이 있어요.</p><p><strong>이황 「도산십이곡」:</strong> <span class="hl-concept">자연 속에서 도를 추구하는 태도, 옛사람에 대한 동경</span>이 공통돼요.</p></div></div>
+  </div>
+  <div class="nav-btns"><button class="btn-prev" onclick="gotoSection(3)">← 분석</button><button class="btn-next" onclick="gotoSection(5)">서술형 →</button></div>
+</section>
+
+<!-- ══════ S5: Advanced Questions ══════ -->
+<section id="s-5" class="section">
+  <div class="chapter-header"><button class="btn-back" onclick="gotoSection(0)">← 목록</button><div class="chapter-header-info"><div class="chapter-header-num">CHAPTER 05</div><div class="chapter-header-title">Advanced Questions</div></div><div class="progress-wrap"><div class="progress-bar"><div class="progress-bar-fill" style="width:83%"></div></div><div class="progress-text">5 / 6</div></div></div>
+  <div class="content-area">
+    <div class="single-card fade-in-up" style="border-top:3px solid var(--navy);"><div class="single-card-header"><span class="card-icon">✍️</span><span class="card-title">서술형 · 논술형 — 상위권 완성 문제</span></div><div class="single-card-body" style="font-size:12px;color:var(--grey);">탭하면 모범 답안이 펼쳐져요.</div></div>
+
+    <div class="single-card fade-in-up"><div class="essay-q-header" onclick="toggleEssay('e1')"><span style="background:var(--navy);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:4px;flex-shrink:0;margin-top:2px;">①</span><span class="essay-q-text">'분 바른 각시'의 상징적 의미를 밝히고, 화자의 세태 비판과 어떻게 연결되는지 서술하시오.</span><span class="essay-toggle-icon" id="ei1">▼</span></div><div id="e1" class="essay-answer"><div class="essay-answer-label">📝 모범 답안</div><p>'분 바른 각시'는 <span class="hl-neg">내면의 수양 없이 겉모습만 치장하는 속물적 인물들</span>을 대표하는 시각적 상징이다. 단순한 여성 묘사가 아니라, 조선 후기 당파 싸움과 권력욕으로 얼룩진 세태 속에서 <span class="hl-neg">외양과 아첨으로 세상을 살아가는 무리 전체</span>를 가리킨다.</p><p>화자는 '내 양자 하 험하니'라며 자신의 외모를 낮추는데, 이는 자책이 아니라 <span class="hl-key">겉모습보다 내면의 진실함을 중시하는 역설적 겸양</span>이다. 분 바른 각시들의 조롱 속에서도 월곡만이 알아주는 내면의 가치를 더욱 부각시키는 효과를 낸다.</p></div></div>
+
+    <div class="single-card fade-in-up"><div class="essay-q-header" onclick="toggleEssay('e2')"><span style="background:var(--navy);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:4px;flex-shrink:0;margin-top:2px;">②</span><span class="essay-q-text">이 작품에서 자연(산, 구름)이 갖는 이중적 역할을 근거를 들어 설명하시오.</span><span class="essay-toggle-icon" id="ei2">▼</span></div><div id="e2" class="essay-answer"><div class="essay-answer-label">📝 모범 답안</div><p>자연은 이 작품에서 상반된 두 역할을 한다. 첫째, <span class="hl-pos">은거의 아름다운 공간</span>으로 기능한다. 제3수에서 '청송으로 울을 삼고 백운으로 장 두르고'는 월곡의 고결한 삶을 감싸는 순수한 자연이에요.</p><p>둘째, <span class="hl-neg">화자와 월곡 사이를 가로막는 장애물</span>로 전환된다. 제6수에서 '뫼는 첩첩하고 구름은 잦았으니'는 만남을 방해하는 물리적 차단막이 된다. <span class="hl-key">같은 자연 소재가 맥락에 따라 역할이 달라지는 것</span>이 이 작품 공간 구조의 핵심이다.</p></div></div>
+
+    <div class="single-card fade-in-up"><div class="essay-q-header" onclick="toggleEssay('e3')"><span style="background:var(--navy);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:4px;flex-shrink:0;margin-top:2px;">③</span><span class="essay-q-text">'밤마다 외로운 꿈만 혼자 다녀오노라'에서 꿈의 이중적 의미를 설명하시오.</span><span class="essay-toggle-icon" id="ei3">▼</span></div><div id="e3" class="essay-answer"><div class="essay-answer-label">📝 모범 답안</div><p>꿈은 이 구절에서 이중적 기능을 동시에 수행한다. <span class="hl-pos">긍정적 차원</span>에서 꿈은 현실의 물리적 거리를 초월할 수 있는 유일한 통로로, 화자가 벗을 만날 수 있게 해 주는 연결 장치다.</p><p>그러나 <span class="hl-neg">부정적 차원</span>에서 '꿈만'이라는 표현은 현실에서는 결코 만날 수 없다는 거리감과 한계를 역설적으로 강조한다. <span class="hl-key">물리적 거리가 멀수록 심리적 밀도는 더 높아지는 역설</span>적 진리가 이 구절에 담겨 있다.</p></div></div>
+
+    <div class="single-card fade-in-up"><div class="essay-q-header" onclick="toggleEssay('e4')"><span style="background:var(--navy);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:4px;flex-shrink:0;margin-top:2px;">④</span><span class="essay-q-text">'상산 채지' 고사를 인용한 목적과 효과를 작품 주제와 연결하여 서술하시오.</span><span class="essay-toggle-icon" id="ei4">▼</span></div><div id="e4" class="essay-answer"><div class="essay-answer-label">📝 모범 답안</div><p>상산사호(商山四皓) 고사는 중국 진나라 때 난세를 피해 산속에서 버섯을 캐며 은거한 네 노인의 이야기다. 화자가 이를 인용한 목적은 <span class="hl-key">속세를 떠나 은거하고자 하는 의지에 역사적 전례와 권위를 부여</span>하기 위해서다.</p><p>고사를 변형하여 '넷이 아닌 둘이'라고 제안하는 것은, <span class="hl-pos">세상의 시선이나 형식을 거부하고 오직 월곡과 단둘이 충분하다는 친밀감과 탈속 의지</span>를 더욱 강하게 드러내는 효과를 낸다. 이는 작품 전체의 탈속 주제를 구체화한다.</p></div></div>
+
+    <div class="single-card fade-in-up"><div class="essay-q-header" onclick="toggleEssay('e5')"><span style="background:var(--navy);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:4px;flex-shrink:0;margin-top:2px;">⑤</span><span class="essay-q-text">마지막 수의 '청학'이 화자의 인생관과 어떻게 연결되는지 논하고, 현실 도피와 구별되는 점을 서술하시오.</span><span class="essay-toggle-icon" id="ei5">▼</span></div><div id="e5" class="essay-answer"><div class="essay-answer-label">📝 모범 답안</div><p>청학은 신선이 타는 상상의 새로, <span class="hl-key">세속의 모든 번뇌와 어지러운 정치적 갈등에서 완전히 벗어난 초월적 자유</span>를 상징한다. 화자가 청학을 타고 싶다는 것은 도교적 탈속의 경지를 지향하는 인생관을 드러낸다.</p><p>이것이 현실 도피와 구별되는 이유는 화자가 <span class="hl-pos">수동적으로 도망치는 것이 아니라, 당파 싸움으로 얼룩진 혼탁한 현실을 적극적으로 거부하고 더 높은 도덕적 가치를 지키기 위한 능동적 선택</span>을 하고 있기 때문이다. 이는 '혼탁한 현실에 저항하는 승리자의 태도'로 해석해야 한다.</p></div></div>
+  </div>
+  <div class="nav-btns"><button class="btn-prev" onclick="gotoSection(4)">← 핵심 정리</button><button class="btn-next" onclick="gotoSection(6)">마무리 →</button></div>
+</section>
+
+<!-- ══════ S6 ══════ -->
+<section id="s-6" class="section">
+  <div class="chapter-header"><button class="btn-back" onclick="gotoSection(0)">← 목록</button><div class="chapter-header-info"><div class="chapter-header-num">CHAPTER 06</div><div class="chapter-header-title">키워드 암기 &amp; 마무리</div></div><div class="progress-wrap"><div class="progress-bar"><div class="progress-bar-fill" style="width:100%"></div></div><div class="progress-text">6 / 6</div></div></div>
+  <div class="content-area">
+    <div class="ending-hero fade-in-up">
+      <div style="font-size:28px;margin-bottom:10px;">🦢</div>
+      <div class="ending-title">청학을 타고 완주!</div>
+      <div class="ending-subtitle">속세를 떠나 고결한 벗을 향한 여정,<br>월곡답가를 끝까지 공부했어요. 수고했어요!</div>
+      <div class="score-badge">학습 완료 ✓</div>
+    </div>
+
+    <div style="font-size:10px;font-weight:700;color:var(--navy);margin-bottom:10px;letter-spacing:.1em;text-transform:uppercase;">📌 핵심 키워드 — 탭해서 외웠으면 체크!</div>
+    <div class="keywords-grid">
+      <div class="keyword-card" onclick="toggleMemorized(this);sparkleEffect(this)"><div class="keyword-card-word">인물 대비</div><div class="keyword-card-def">분 바른 각시(가식) ↔ 월곡(진실) — 주제의 뼈대</div></div>
+      <div class="keyword-card" onclick="toggleMemorized(this);sparkleEffect(this)"><div class="keyword-card-word">진념(塵念)</div><div class="keyword-card-def">세속적 욕심. 없음이 월곡의 최고 덕목 — 시험 핵심어</div></div>
+      <div class="keyword-card" onclick="toggleMemorized(this);sparkleEffect(this)"><div class="keyword-card-word">자연의 이중성</div><div class="keyword-card-def">청송·백운(은거지) ↔ 뫼·구름(장애물) — 같은 자연, 다른 역할</div></div>
+      <div class="keyword-card" onclick="toggleMemorized(this);sparkleEffect(this)"><div class="keyword-card-word">꿈의 이중성</div><div class="keyword-card-def">연결 장치(긍정) + 거리감 강조(부정) — 양면 모두 정답</div></div>
+      <div class="keyword-card" onclick="toggleMemorized(this);sparkleEffect(this)"><div class="keyword-card-word">상산 채지</div><div class="keyword-card-def">상산사호 고사 — 은거 의지에 역사적 권위 부여</div></div>
+      <div class="keyword-card" onclick="toggleMemorized(this);sparkleEffect(this)"><div class="keyword-card-word">청학(靑鶴)</div><div class="keyword-card-def">탈속·초월의 상징. 현실 도피 아닌 능동적 승화</div></div>
+    </div>
+
+    <div class="final-message fade-in-up">
+      "'분 바른 각시'는 가식 비판, 자연은 이중적 기능,<br>
+      꿈도 이중적, 청학은 도피 아닌 승화 — 이 네 가지가 이 작품의 전부예요."
+    </div>
+
+    <!-- 국어 쌤 — 초가삼간 선비 아바타 -->
+    <div class="teacher-card fade-in-up">
+      <div class="teacher-header">
+        <div class="teacher-avatar">
+          <!-- 「월곡답가」핵심 이미지: 대나무 숲 속 선비 + 청학 -->
+          <svg viewBox="0 0 58 58" xmlns="http://www.w3.org/2000/svg">
+            <!-- 배경: 옥빛 하늘 -->
+            <rect width="58" height="58" rx="10" fill="#E0F2E9"/>
+            <!-- 대나무 줄기 3개 -->
+            <line x1="8" y1="58" x2="8" y2="20" stroke="#1A5C42" stroke-width="2.5" opacity=".55"/>
+            <line x1="14" y1="58" x2="14" y2="26" stroke="#2A7A58" stroke-width="2" opacity=".45"/>
+            <line x1="50" y1="58" x2="50" y2="22" stroke="#1A5C42" stroke-width="2.5" opacity=".5"/>
+            <!-- 대나무 잎 -->
+            <path d="M8 30 Q2 25 6 20" stroke="#2A7060" stroke-width="1.5" fill="none" opacity=".6"/>
+            <path d="M8 38 Q14 32 10 26" stroke="#3D9B72" stroke-width="1.5" fill="none" opacity=".5"/>
+            <path d="M50 30 Q56 25 52 20" stroke="#2A7060" stroke-width="1.5" fill="none" opacity=".6"/>
+            <!-- 선비 -->
+            <circle cx="29" cy="16" r="5" fill="#162018"/>
+            <!-- 갓 -->
+            <ellipse cx="29" cy="12" rx="8" ry="2.5" fill="#0E3B2A"/>
+            <rect x="26" y="8" width="6" height="5" rx="1" fill="#162018"/>
+            <!-- 도포 -->
+            <path d="M22 22 L29 20 L36 22 L38 42 L20 42 Z" fill="#1A5C42" opacity=".8"/>
+            <!-- 소매 -->
+            <path d="M22 22 L14 32 L16 34 L24 26" fill="#1A5C42" opacity=".7"/>
+            <path d="M36 22 L44 32 L42 34 L34 26" fill="#1A5C42" opacity=".7"/>
+            <!-- 다리 -->
+            <line x1="24" y1="42" x2="22" y2="54" stroke="#162018" stroke-width="2"/>
+            <line x1="34" y1="42" x2="36" y2="54" stroke="#162018" stroke-width="2"/>
+            <!-- 청학 날기 -->
+            <path d="M36 10 Q44 4 52 10" stroke="#2A7060" stroke-width="1.5" fill="none" opacity=".7"/>
+            <circle cx="36" cy="10" r="2" fill="#1A5C42" opacity=".7"/>
+            <path d="M38 12 Q40 16 36 18" stroke="#2A7060" stroke-width="1.2" fill="none" opacity=".5"/>
+            <!-- 달 -->
+            <circle cx="6" cy="8" r="4" fill="#E0F2E9" stroke="#2A7060" stroke-width="1" opacity=".7"/>
+            <circle cx="7.5" cy="7" r="2.5" fill="#C8E8D4" opacity=".6"/>
+          </svg>
+        </div>
+        <div class="teacher-info">
+          <div class="teacher-name">국어 쌤</div>
+          <div class="teacher-role">청학을 타고 싶다 · 조선 시대 연시조</div>
+        </div>
+      </div>
+      <div class="teacher-statement">이 작품이 나오면 <strong>네 가지만</strong> 기억하세요. <strong>'분 바른 각시' = 가식 비판 (여성 묘사 아님)</strong>. <strong>자연은 은거지이자 장애물 (이중 역할)</strong>. <strong>꿈도 긍정이자 부정 (이중적 매개)</strong>. <strong>청학 = 현실 도피 아닌 능동적 승화</strong>예요.</div>
+      <div class="principle-list">
+        <div class="principle-card"><div class="principle-num">①</div><div class="principle-text">분 바른 각시 = 가식 세속 비판 → 여성 비하 아님 — 내신 1순위 함정</div></div>
+        <div class="principle-card"><div class="principle-num">②</div><div class="principle-text">자연 이중 역할 → 청송·백운(은거지) vs 뫼·구름(장애물) 구별 필수</div></div>
+        <div class="principle-card"><div class="principle-num">③</div><div class="principle-text">꿈 이중성 → 연결(긍정) + 거리감 강조(부정) 양면 모두 정답</div></div>
+        <div class="principle-card"><div class="principle-num">④</div><div class="principle-text">청학 = 탈속적 의지 → 현실 도피 아닌 능동적 저항 = 수능 서술형 정답</div></div>
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:16px 0 8px;">
+      <button class="btn-start" onclick="gotoSection(0)" style="font-size:13px;padding:12px 32px;">처음으로 돌아가기</button>
+    </div>
+  </div>
+</section>
+
+<!-- ════ BOTTOM NAV ════ -->
+<nav class="bottom-nav">
+  <div class="nav-item" id="nav-home" onclick="gotoSection(0)"><span class="nav-item-icon">🏡</span><span class="nav-item-label">홈</span></div>
+  <div class="nav-item" id="nav-poem" onclick="gotoSection(2)"><span class="nav-item-icon">🍃</span><span class="nav-item-label">구절</span></div>
+  <div class="nav-item" id="nav-analysis" onclick="gotoSection(3)"><span class="nav-item-icon">🔎</span><span class="nav-item-label">분석</span></div>
+  <div class="nav-item" id="nav-quiz" onclick="gotoSection(5)"><span class="nav-item-icon">✍️</span><span class="nav-item-label">서술형</span></div>
+  <div class="nav-item" id="nav-end" onclick="gotoSection(6)"><span class="nav-item-icon">🌙</span><span class="nav-item-label">마무리</span></div>
+</nav>
+
+<script>
+const SECTIONS=['s-hero','s-1','s-2','s-3','s-4','s-5','s-6'];
+const NAV_MAP=[0,0,1,2,2,3,4];
+const NAV_IDS=['nav-home','nav-poem','nav-analysis','nav-quiz','nav-end'];
+const NAV_SECTION=[0,2,3,5,6];
+
+function gotoSection(idx){
+  idx=parseInt(idx,10);
+  SECTIONS.forEach((id,i)=>{const el=document.getElementById(id);if(el) el.classList.toggle('active',i===idx);});
+  NAV_IDS.forEach((id,i)=>{document.getElementById(id)?.classList.toggle('active',i===NAV_MAP[idx]);});
+  window.scrollTo(0,0);
+  setTimeout(()=>{
+    const sel=`#${SECTIONS[idx]} .single-card,#${SECTIONS[idx]} .summary-card,#${SECTIONS[idx]} .guideline-card`;
+    document.querySelectorAll(sel).forEach((card,i)=>{
+      card.style.opacity='0';card.style.transform='translateY(12px)';
+      setTimeout(()=>{card.style.transition='all .38s cubic-bezier(.16,1,.3,1)';card.style.opacity='1';card.style.transform='translateY(0)';},i*70);
+    });
+  },10);
+}
+
+function addTap(el,fn){
+  if(!el) return;
+  let touched=false;
+  el.addEventListener('touchend',function(e){touched=true;e.preventDefault();fn.call(this,e);setTimeout(()=>{touched=false;},400);},{passive:false});
+  el.addEventListener('click',function(e){if(touched) return;fn.call(this,e);});
+}
+
+// 스크롤 판별용 전역 변수
+let _touchStartY=0, _touchStartX=0;
+document.addEventListener('touchstart',function(e){
+  _touchStartY=e.touches[0].clientY;
+  _touchStartX=e.touches[0].clientX;
+},{passive:true});
+
+function _isScroll(e){
+  const dy=Math.abs(e.changedTouches[0].clientY - _touchStartY);
+  const dx=Math.abs(e.changedTouches[0].clientX - _touchStartX);
+  return dy > 8 || dx > 8;
+}
+
+function toggleAnnotation(id){
+  const el=document.getElementById(id);if(!el) return;
+  const stanza=el.closest('.poem-stanza');
+  const wasVisible=el.classList.contains('visible');
+  document.querySelectorAll('.poem-annotation').forEach(a=>a.classList.remove('visible'));
+  document.querySelectorAll('.poem-stanza').forEach(s=>s.classList.remove('active-stanza'));
+  if(!wasVisible){el.classList.add('visible');stanza?.classList.add('active-stanza');}
+}
+
+function toggleEssay(id){
+  const el=document.getElementById(id);if(!el) return;
+  const num=id.replace('e','');
+  const icon=document.getElementById('ei'+num);
+  const wasHidden=(el.style.display===''||el.style.display==='none');
+  el.style.display=wasHidden?'block':'none';
+  el.classList.toggle('visible',wasHidden);
+  if(icon){icon.style.transform=wasHidden?'rotate(180deg)':'rotate(0deg)';icon.classList.toggle('open',wasHidden);}
+}
+
+function toggleMemorized(el){el.classList.toggle('memorized');}
+
+/* ══════════════════════════════════════
+   SPARKLE — 옥색 테마 3종 순환
+   소나무잎 / 구름 / 청학
+   ══════════════════════════════════════ */
+let sparkIdx=0;
+function sparkleEffect(el){
+  if(!el) return;
+  const rect=el.getBoundingClientRect();
+  const cx=rect.left+rect.width/2, cy=rect.top+rect.height/2;
+  const type=sparkIdx%3; sparkIdx++;
+
+  if(type===0){
+    /* 소나무잎 + 옥색 별 */
+    const shapes=['✦','⋆','✧','◈','꽃','❋'];
+    const cols=['#1A5C42','#CD2E3A','#A0740A','#2A7A58','#003478','#3D9B72'];
+    for(let i=0;i<10;i++){
+      const s=document.createElement('span');
+      const a=(i/10)*Math.PI*2, d=36+Math.random()*44, sz=8+Math.random()*14;
+      s.textContent=shapes[i%6];
+      s.style.cssText=`position:fixed;font-size:${sz}px;left:${cx}px;top:${cy}px;pointer-events:none;z-index:9999;color:${cols[i%6]};transition:all .6s cubic-bezier(.16,1,.3,1);opacity:1;`;
+      document.body.appendChild(s);
+      requestAnimationFrame(()=>{s.style.transform=`translate(${Math.cos(a)*d}px,${Math.sin(a)*d-16}px) rotate(${Math.random()*360}deg) scale(.1)`;s.style.opacity='0';});
+      setTimeout(()=>s.remove(),700);
+    }
+  } else if(type===1){
+    /* 구름 + 백운 텍스트 */
+    const bcols=['rgba(26,92,66,.5)','rgba(205,46,58,.4)','rgba(160,116,10,.4)'];
+    for(let i=0;i<8;i++){
+      const d=document.createElement('div');
+      const a=(i/8)*Math.PI*2, dist=28+Math.random()*42, w=14+Math.random()*18, h=3+Math.random()*3;
+      d.style.cssText=`position:fixed;width:${w}px;height:${h}px;border-radius:${h}px;background:${bcols[i%3]};left:${cx}px;top:${cy}px;pointer-events:none;z-index:9999;transform-origin:left center;transform:rotate(${a*180/Math.PI}deg);transition:all .48s cubic-bezier(.16,1,.3,1);opacity:.9;`;
+      document.body.appendChild(d);
+      requestAnimationFrame(()=>{d.style.transform=`translate(${Math.cos(a)*dist}px,${Math.sin(a)*dist}px) rotate(${a*180/Math.PI}deg) scaleX(0)`;d.style.opacity='0';});
+      setTimeout(()=>d.remove(),580);
+    }
+    const h=document.createElement('span');
+    h.textContent='진념';
+    h.style.cssText=`position:fixed;font-size:14px;left:${cx-14}px;top:${cy-30}px;pointer-events:none;z-index:9999;color:rgba(26,92,66,.7);font-family:'Noto Serif KR',serif;font-weight:700;transition:all .6s ease;`;
+    document.body.appendChild(h);
+    requestAnimationFrame(()=>{h.style.transform='translateY(-20px) scale(1.3)';h.style.opacity='0';});
+    setTimeout(()=>h.remove(),700);
+  } else {
+    /* 청학 날기 */
+    for(let i=0;i<5;i++){
+      const s=document.createElement('span');
+      const a=(i/5)*Math.PI*2+Math.random()*.4, d=42+Math.random()*48, sz=12+Math.random()*10;
+      s.textContent='🦢';
+      s.style.cssText=`position:fixed;font-size:${sz}px;left:${cx}px;top:${cy}px;pointer-events:none;z-index:9999;transition:all .8s cubic-bezier(.16,1,.3,1);opacity:.85;`;
+      document.body.appendChild(s);
+      const fl=Math.random()>.5?' scaleX(-1)':'';
+      requestAnimationFrame(()=>{s.style.transform=`translate(${Math.cos(a)*d}px,${Math.sin(a)*d-28}px)${fl} scale(.1)`;s.style.opacity='0';});
+      setTimeout(()=>s.remove(),900);
+    }
+    const g=document.createElement('span');
+    g.textContent='청학';
+    g.style.cssText=`position:fixed;font-size:13px;left:${cx-14}px;top:${cy-36}px;pointer-events:none;z-index:9999;color:rgba(26,92,66,.75);font-family:'Noto Serif KR',serif;font-weight:700;transition:all .6s ease;`;
+    document.body.appendChild(g);
+    requestAnimationFrame(()=>{g.style.transform='translateY(-24px)';g.style.opacity='0';});
+    setTimeout(()=>g.remove(),700);
+  }
+}
+
+document.addEventListener('DOMContentLoaded',function(){
+  // onclick 요소에 touchend 등록 — 스크롤 중 오발 방지
+  document.querySelectorAll('[onclick]').forEach(el=>{
+    let startY=0;
+    el.addEventListener('touchstart',function(e){
+      startY=e.touches[0].clientY;
+    },{passive:true});
+    el.addEventListener('touchend',function(e){
+      const dy=Math.abs(e.changedTouches[0].clientY - startY);
+      if(dy > 8) return; // 8px 이상 움직이면 스크롤로 판단, 클릭 무시
+      e.preventDefault();
+      const fn=this.getAttribute('onclick');
+      if(fn){try{eval(fn);}catch(err){}}
+    },{passive:false});
+  });
+  NAV_IDS.forEach((id,i)=>{
+    const el=document.getElementById(id);if(!el) return;
+    addTap(el,function(){gotoSection(NAV_SECTION[i]);});
+  });
+  document.getElementById('nav-home')?.classList.add('active');
+});
+</script>
+</body>
+</html>
